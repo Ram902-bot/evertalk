@@ -4,11 +4,18 @@ import WhisperKit
 enum TranscriptionError: Error {
     case modelNotLoaded
     case transcriptionFailed(String)
+    case modelDownloadFailed(String)
 }
 
-class TranscriptionEngine {
+@MainActor
+class TranscriptionEngine: ObservableObject {
     private var whisperKit: WhisperKit?
     private var isLoading = false
+
+    @Published var isModelReady = false
+    @Published var isDownloading = false
+    @Published var downloadProgress: Double = 0.0
+    @Published var setupStatus: String = ""
 
     init() {
         Task {
@@ -19,29 +26,54 @@ class TranscriptionEngine {
     private func loadModel() async {
         guard !isLoading else { return }
         isLoading = true
+        isDownloading = true
+        setupStatus = "Setting up Evertalk..."
 
         do {
-            // Load model from app bundle Resources folder (no download needed)
-            // Model files (AudioEncoder.mlmodelc, TextDecoder.mlmodelc, etc.) are at Resources root
-            guard let resourcePath = Bundle.main.resourcePath,
-                  FileManager.default.fileExists(atPath: resourcePath + "/AudioEncoder.mlmodelc") else {
-                print("Model not found in bundle - falling back to download")
+            // Download model to Application Support (persists across app updates)
+            let appSupport = FileManager.default.urls(for: .applicationSupportDirectory, in: .userDomainMask).first!
+            let evertalkDir = appSupport.appendingPathComponent("Evertalk")
+            let modelDir = evertalkDir.appendingPathComponent("models")
+
+            // Create directory if needed
+            try? FileManager.default.createDirectory(at: modelDir, withIntermediateDirectories: true)
+
+            // Check if model already exists
+            let modelPath = modelDir.appendingPathComponent("openai_whisper-small.en")
+            let modelExists = FileManager.default.fileExists(atPath: modelPath.appendingPathComponent("AudioEncoder.mlmodelc").path)
+
+            if modelExists {
+                setupStatus = "Loading model..."
+                downloadProgress = 1.0
                 whisperKit = try await WhisperKit(
-                    model: "small.en",
+                    modelFolder: modelPath.path,
                     verbose: false,
                     logLevel: .none
                 )
-                isLoading = false
-                return
+            } else {
+                setupStatus = "Downloading AI model..."
+
+                // WhisperKit downloads to its default location, we'll use that
+                whisperKit = try await WhisperKit(
+                    model: "small.en",
+                    verbose: false,
+                    logLevel: .none,
+                    prewarm: true,
+                    load: true,
+                    download: true
+                )
+
+                downloadProgress = 1.0
             }
 
-            whisperKit = try await WhisperKit(
-                modelFolder: resourcePath,
-                verbose: false,
-                logLevel: .none
-            )
-            print("WhisperKit model loaded from bundle successfully")
+            setupStatus = "Ready!"
+            isModelReady = true
+            isDownloading = false
+            print("WhisperKit model loaded successfully")
+
         } catch {
+            setupStatus = "Setup failed"
+            isDownloading = false
             print("Failed to load WhisperKit model: \(error)")
         }
 

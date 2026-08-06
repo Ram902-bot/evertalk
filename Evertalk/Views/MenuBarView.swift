@@ -31,7 +31,7 @@ struct MenuBarView: View {
             .buttonStyle(.plain)
             .padding(.horizontal, 12)
             .padding(.vertical, 6)
-            .disabled(appState.status == .transcribing)
+            .disabled(appState.status == .transcribing || appState.status == .settingUp)
 
             Divider()
 
@@ -58,6 +58,8 @@ struct MenuBarView: View {
 
     var statusColor: Color {
         switch appState.status {
+        case .settingUp:
+            return .blue
         case .idle:
             return .gray
         case .recording:
@@ -69,6 +71,8 @@ struct MenuBarView: View {
 
     var statusText: String {
         switch appState.status {
+        case .settingUp:
+            return "Setting up..."
         case .idle:
             return "Ready"
         case .recording:

@@ -20,8 +20,13 @@ struct OverlayView: View {
                 // Content
                 HStack(spacing: 6) {
                     if !isMinimal {
-                        // Recording indicator dot
-                        if appState.status == .recording {
+                        // Status indicator
+                        if appState.status == .settingUp {
+                            // Spinning loader for setup
+                            ProgressView()
+                                .scaleEffect(0.6)
+                                .frame(width: 12, height: 12)
+                        } else if appState.status == .recording {
                             Circle()
                                 .fill(Color.red)
                                 .frame(width: 8, height: 8)
@@ -65,7 +70,7 @@ struct OverlayView: View {
     }
 
     var isMinimal: Bool {
-        appState.status == .idle && !isHovering
+        appState.status == .idle && !isHovering && !appState.transcriptionEngine.isDownloading
     }
 
     var backgroundFill: some ShapeStyle {
@@ -104,6 +109,8 @@ struct OverlayView: View {
 
     var displayText: String {
         switch appState.status {
+        case .settingUp:
+            return appState.transcriptionEngine.setupStatus
         case .idle:
             return "Evertalk"
         case .recording:
@@ -114,7 +121,9 @@ struct OverlayView: View {
     }
 
     var pillWidth: CGFloat {
-        if appState.status == .recording {
+        if appState.status == .settingUp {
+            return 180  // Wider for setup text
+        } else if appState.status == .recording {
             return 115
         } else if appState.status == .transcribing {
             return 120
@@ -126,7 +135,7 @@ struct OverlayView: View {
     }
 
     var pillHeight: CGFloat {
-        if appState.status != .idle {
+        if appState.status == .settingUp || appState.status != .idle {
             return 28
         } else if isHovering {
             return 26

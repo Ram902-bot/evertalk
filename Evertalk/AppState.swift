@@ -2,6 +2,7 @@ import SwiftUI
 import Combine
 
 enum RecordingStatus {
+    case settingUp
     case idle
     case recording
     case transcribing
@@ -9,10 +10,10 @@ enum RecordingStatus {
 
 @MainActor
 class AppState: ObservableObject {
-    @Published var status: RecordingStatus = .idle
+    @Published var status: RecordingStatus = .settingUp
     @Published var transcription: String = ""
     @Published var errorMessage: String?
-    @Published var showOverlay: Bool = false
+    @Published var showOverlay: Bool = true  // Show during setup
 
     // Settings
     @AppStorage("launchAtLogin") var launchAtLogin: Bool = false
@@ -22,8 +23,29 @@ class AppState: ObservableObject {
     let transcriptionEngine = TranscriptionEngine()
     let pasteManager = PasteManager()
 
+    private var cancellables = Set<AnyCancellable>()
+
+    init() {
+        // Observe model ready state
+        transcriptionEngine.$isModelReady
+            .receive(on: DispatchQueue.main)
+            .sink { [weak self] isReady in
+                if isReady {
+                    self?.status = .idle
+                    // Hide overlay after setup complete
+                    DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
+                        self?.showOverlay = false
+                    }
+                }
+            }
+            .store(in: &cancellables)
+    }
+
     func toggleRecording() {
         switch status {
+        case .settingUp:
+            // Ignore while setting up
+            break
         case .idle:
             startRecording()
         case .recording:
