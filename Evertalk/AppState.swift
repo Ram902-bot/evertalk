@@ -35,6 +35,9 @@ class AppState: ObservableObject {
     }
 
     func startRecording() {
+        // Save the current frontmost app so we can paste back to it
+        pasteManager.saveFrontmostApp()
+
         do {
             try audioEngine.startRecording()
             status = .recording
@@ -64,11 +67,8 @@ class AppState: ObservableObject {
 
                 transcription = text
 
-                // Try inline paste, fallback to clipboard
-                let pasted = pasteManager.pasteText(text)
-                if !pasted {
-                    copyToClipboard(text)
-                }
+                // Paste text inline (copies to clipboard and pastes)
+                pasteManager.pasteText(text)
 
                 status = .idle
 
@@ -84,9 +84,4 @@ class AppState: ObservableObject {
         }
     }
 
-    private func copyToClipboard(_ text: String) {
-        let pasteboard = NSPasteboard.general
-        pasteboard.clearContents()
-        pasteboard.setString(text, forType: .string)
-    }
 }

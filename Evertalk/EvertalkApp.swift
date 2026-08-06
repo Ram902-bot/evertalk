@@ -1,6 +1,7 @@
 import SwiftUI
 import AVFoundation
 import Combine
+import ApplicationServices
 
 @main
 struct EvertalkApp: App {
@@ -29,6 +30,9 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     private var cancellables = Set<AnyCancellable>()
 
     func applicationDidFinishLaunching(_ notification: Notification) {
+        // Request Accessibility permission - THIS IS REQUIRED FOR INLINE PASTE
+        requestAccessibilityPermission()
+
         // Request microphone permission
         AVCaptureDevice.requestAccess(for: .audio) { granted in
             if !granted {
@@ -43,19 +47,33 @@ class AppDelegate: NSObject, NSApplicationDelegate {
             }
         }
 
-        // Setup overlay window
+        // Setup overlay window and show it always
         overlayWindow = OverlayWindowController(appState: appState)
+        overlayWindow?.show()
+    }
 
-        // Observe recording state to show/hide overlay
-        appState.$showOverlay
-            .receive(on: DispatchQueue.main)
-            .sink { [weak self] show in
-                if show {
-                    self?.overlayWindow?.show()
-                } else {
-                    self?.overlayWindow?.hide()
+    private func requestAccessibilityPermission() {
+        // Check if we have accessibility permission
+        let options = [kAXTrustedCheckOptionPrompt.takeUnretainedValue() as String: true] as CFDictionary
+        let trusted = AXIsProcessTrustedWithOptions(options)
+
+        if !trusted {
+            // Show alert explaining why we need this
+            DispatchQueue.main.async {
+                let alert = NSAlert()
+                alert.messageText = "Accessibility Permission Required"
+                alert.informativeText = "Evertalk needs Accessibility permission to paste transcribed text directly into your apps.\n\n1. Click 'Open Settings' below\n2. Find 'Evertalk' in the list\n3. Toggle it ON\n4. Restart Evertalk"
+                alert.alertStyle = .warning
+                alert.addButton(withTitle: "Open Settings")
+                alert.addButton(withTitle: "Later")
+
+                if alert.runModal() == .alertFirstButtonReturn {
+                    // Open System Settings to Accessibility
+                    if let url = URL(string: "x-apple.systempreferences:com.apple.preference.security?Privacy_Accessibility") {
+                        NSWorkspace.shared.open(url)
+                    }
                 }
             }
-            .store(in: &cancellables)
+        }
     }
 }
