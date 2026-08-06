@@ -12,27 +12,37 @@
 		2BA7E42B68EF0737EEB59E64 /* AudioEngine.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC9F092E17B21341B9E5C66B /* AudioEngine.swift */; };
 		754C2E1C408D479C8B77EED4 /* MenuBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A00B1EEE889D997BAE7B9050 /* MenuBarView.swift */; };
 		7BF060B7AAC01BA76C664982 /* EvertalkApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4D0324BA5F480363F7359C7 /* EvertalkApp.swift */; };
+		7EC7D71EBD835FB7F59C451F /* generation_config.json in Resources */ = {isa = PBXBuildFile; fileRef = D91550C9F643FA89AE9834CE /* generation_config.json */; };
 		96A572328EFC4BF5CCB571ED /* OverlayView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF4BBD74DDC11273F54E2A0B /* OverlayView.swift */; };
+		B5F20484FD27305C1EC26A22 /* AudioEncoder.mlmodelc in Resources */ = {isa = PBXBuildFile; fileRef = 0BACB97C2B273B1AAA3372E7 /* AudioEncoder.mlmodelc */; };
 		B8B2C64A40E962E7A7B1CDDE /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 045BDF4FF987F8607844A354 /* Assets.xcassets */; };
+		BA7286D303D2AEC8FA236ACB /* MelSpectrogram.mlmodelc in Resources */ = {isa = PBXBuildFile; fileRef = 2D6D4649F8D29922121244D2 /* MelSpectrogram.mlmodelc */; };
 		BD2B497A44C93E0B221D6555 /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48CCBE775B183418595D2C0D /* SettingsView.swift */; };
 		C8E15AD893B68D16191975A6 /* WhisperKit in Frameworks */ = {isa = PBXBuildFile; productRef = A794ECF4A623E194E8EE0F98 /* WhisperKit */; };
 		D6D5B93F4E0AF72386BC75F3 /* HotkeyManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73E6263B52EEA8F220761D5C /* HotkeyManager.swift */; };
+		DF5CC147BBDF9B6BD904D3A1 /* config.json in Resources */ = {isa = PBXBuildFile; fileRef = 74EA89DA78E7B56FCA4B6C05 /* config.json */; };
 		E3D30C80325139C09776E2F2 /* TranscriptionEngine.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF418B0ACA0938DC956B947A /* TranscriptionEngine.swift */; };
+		E3D65198C62877381C1E6418 /* TextDecoder.mlmodelc in Resources */ = {isa = PBXBuildFile; fileRef = 542F7B033B83B09237C02176 /* TextDecoder.mlmodelc */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		045BDF4FF987F8607844A354 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		0BACB97C2B273B1AAA3372E7 /* AudioEncoder.mlmodelc */ = {isa = PBXFileReference; path = AudioEncoder.mlmodelc; sourceTree = "<group>"; };
+		2D6D4649F8D29922121244D2 /* MelSpectrogram.mlmodelc */ = {isa = PBXFileReference; path = MelSpectrogram.mlmodelc; sourceTree = "<group>"; };
 		3204F702F0E42D56C81CC148 /* Evertalk.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Evertalk.entitlements; sourceTree = "<group>"; };
 		46E0AB8E0222E641F13AE5B5 /* AppState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppState.swift; sourceTree = "<group>"; };
 		48CCBE775B183418595D2C0D /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
 		4C962A29F9C703037C20D2ED /* PasteManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PasteManager.swift; sourceTree = "<group>"; };
+		542F7B033B83B09237C02176 /* TextDecoder.mlmodelc */ = {isa = PBXFileReference; path = TextDecoder.mlmodelc; sourceTree = "<group>"; };
 		73E6263B52EEA8F220761D5C /* HotkeyManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HotkeyManager.swift; sourceTree = "<group>"; };
+		74EA89DA78E7B56FCA4B6C05 /* config.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = config.json; sourceTree = "<group>"; };
 		7BCC2A2CE7441614691FAB2D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		8F70E5D37B58BF424E7B4867 /* Evertalk.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Evertalk.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A00B1EEE889D997BAE7B9050 /* MenuBarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuBarView.swift; sourceTree = "<group>"; };
 		AF418B0ACA0938DC956B947A /* TranscriptionEngine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TranscriptionEngine.swift; sourceTree = "<group>"; };
 		AF4BBD74DDC11273F54E2A0B /* OverlayView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OverlayView.swift; sourceTree = "<group>"; };
 		C4D0324BA5F480363F7359C7 /* EvertalkApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EvertalkApp.swift; sourceTree = "<group>"; };
+		D91550C9F643FA89AE9834CE /* generation_config.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = generation_config.json; sourceTree = "<group>"; };
 		EC9F092E17B21341B9E5C66B /* AudioEngine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AudioEngine.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -57,9 +67,22 @@
 				C4D0324BA5F480363F7359C7 /* EvertalkApp.swift */,
 				7BCC2A2CE7441614691FAB2D /* Info.plist */,
 				783BD0391B6045269E340708 /* Managers */,
+				928D61BA89534A4424C5973C /* Resources */,
 				93EC484E34F65D45D5199881 /* Views */,
 			);
 			path = Evertalk;
+			sourceTree = "<group>";
+		};
+		3EC06C6D78BB0EB5595D3D56 /* openai_whisper-small.en */ = {
+			isa = PBXGroup;
+			children = (
+				0BACB97C2B273B1AAA3372E7 /* AudioEncoder.mlmodelc */,
+				74EA89DA78E7B56FCA4B6C05 /* config.json */,
+				D91550C9F643FA89AE9834CE /* generation_config.json */,
+				2D6D4649F8D29922121244D2 /* MelSpectrogram.mlmodelc */,
+				542F7B033B83B09237C02176 /* TextDecoder.mlmodelc */,
+			);
+			path = "openai_whisper-small.en";
 			sourceTree = "<group>";
 		};
 		677CA044B5C341B96AB774A7 /* Products */ = {
@@ -87,6 +110,14 @@
 				18DCAAD9EE481150D921ABE8 /* Evertalk */,
 				677CA044B5C341B96AB774A7 /* Products */,
 			);
+			sourceTree = "<group>";
+		};
+		928D61BA89534A4424C5973C /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				3EC06C6D78BB0EB5595D3D56 /* openai_whisper-small.en */,
+			);
+			path = Resources;
 			sourceTree = "<group>";
 		};
 		93EC484E34F65D45D5199881 /* Views */ = {
@@ -165,6 +196,11 @@
 			buildActionMask = 2147483647;
 			files = (
 				B8B2C64A40E962E7A7B1CDDE /* Assets.xcassets in Resources */,
+				B5F20484FD27305C1EC26A22 /* AudioEncoder.mlmodelc in Resources */,
+				BA7286D303D2AEC8FA236ACB /* MelSpectrogram.mlmodelc in Resources */,
+				E3D65198C62877381C1E6418 /* TextDecoder.mlmodelc in Resources */,
+				DF5CC147BBDF9B6BD904D3A1 /* config.json in Resources */,
+				7EC7D71EBD835FB7F59C451F /* generation_config.json in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

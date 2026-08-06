@@ -21,13 +21,26 @@ class TranscriptionEngine {
         isLoading = true
 
         do {
-            // WhisperKit will download the model if not cached
+            // Load model from app bundle Resources folder (no download needed)
+            // Model files (AudioEncoder.mlmodelc, TextDecoder.mlmodelc, etc.) are at Resources root
+            guard let resourcePath = Bundle.main.resourcePath,
+                  FileManager.default.fileExists(atPath: resourcePath + "/AudioEncoder.mlmodelc") else {
+                print("Model not found in bundle - falling back to download")
+                whisperKit = try await WhisperKit(
+                    model: "small.en",
+                    verbose: false,
+                    logLevel: .none
+                )
+                isLoading = false
+                return
+            }
+
             whisperKit = try await WhisperKit(
-                model: "base.en",
+                modelFolder: resourcePath,
                 verbose: false,
                 logLevel: .none
             )
-            print("WhisperKit model loaded successfully")
+            print("WhisperKit model loaded from bundle successfully")
         } catch {
             print("Failed to load WhisperKit model: \(error)")
         }

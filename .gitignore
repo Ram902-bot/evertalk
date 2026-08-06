@@ -1,6 +1,7 @@
-# Models (downloaded separately)
+# Models (downloaded separately - too large for git)
 models/
 *.bin
+Evertalk/Resources/openai_whisper-*/
 
 # macOS
 .DS_Store
