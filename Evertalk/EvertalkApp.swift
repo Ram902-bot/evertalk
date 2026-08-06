@@ -53,27 +53,14 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     }
 
     private func requestAccessibilityPermission() {
-        // Check if we have accessibility permission
-        let options = [kAXTrustedCheckOptionPrompt.takeUnretainedValue() as String: true] as CFDictionary
-        let trusted = AXIsProcessTrustedWithOptions(options)
+        // First check WITHOUT prompting
+        let trusted = AXIsProcessTrusted()
 
+        // Only show our custom dialog if not trusted
         if !trusted {
-            // Show alert explaining why we need this
-            DispatchQueue.main.async {
-                let alert = NSAlert()
-                alert.messageText = "Accessibility Permission Required"
-                alert.informativeText = "Evertalk needs Accessibility permission to paste transcribed text directly into your apps.\n\n1. Click 'Open Settings' below\n2. Find 'Evertalk' in the list\n3. Toggle it ON\n4. Restart Evertalk"
-                alert.alertStyle = .warning
-                alert.addButton(withTitle: "Open Settings")
-                alert.addButton(withTitle: "Later")
-
-                if alert.runModal() == .alertFirstButtonReturn {
-                    // Open System Settings to Accessibility
-                    if let url = URL(string: "x-apple.systempreferences:com.apple.preference.security?Privacy_Accessibility") {
-                        NSWorkspace.shared.open(url)
-                    }
-                }
-            }
+            // This will trigger the system prompt to add to Accessibility
+            let options = [kAXTrustedCheckOptionPrompt.takeUnretainedValue() as String: true] as CFDictionary
+            _ = AXIsProcessTrustedWithOptions(options)
         }
     }
 }
