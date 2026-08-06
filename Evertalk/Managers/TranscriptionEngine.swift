@@ -38,11 +38,10 @@ class TranscriptionEngine: ObservableObject {
             // Create directory if needed
             try? FileManager.default.createDirectory(at: modelDir, withIntermediateDirectories: true)
 
-            // Check if model already exists
-            let modelPath = modelDir.appendingPathComponent("openai_whisper-small.en")
-            let modelExists = FileManager.default.fileExists(atPath: modelPath.appendingPathComponent("AudioEncoder.mlmodelc").path)
+            // Check if model already exists (search recursively for AudioEncoder.mlmodelc)
+            let existingModelPath = findExistingModel(in: modelDir)
 
-            if modelExists {
+            if let modelPath = existingModelPath {
                 setupStatus = "Loading model..."
                 downloadProgress = 1.0
                 whisperKit = try await WhisperKit(
@@ -52,18 +51,30 @@ class TranscriptionEngine: ObservableObject {
                 )
             } else {
                 setupStatus = "Downloading AI model..."
+                downloadProgress = 0.0
 
-                // WhisperKit downloads to its default location, we'll use that
+                // Download with progress callback
+                let downloadedFolder = try await WhisperKit.download(
+                    variant: "small.en",
+                    downloadBase: modelDir,
+                    useBackgroundSession: false
+                ) { [weak self] progress in
+                    Task { @MainActor in
+                        self?.downloadProgress = progress.fractionCompleted
+                    }
+                }
+
+                downloadProgress = 1.0
+                setupStatus = "Loading model..."
+
+                // Initialize WhisperKit from downloaded folder
                 whisperKit = try await WhisperKit(
-                    model: "small.en",
+                    modelFolder: downloadedFolder.path,
                     verbose: false,
                     logLevel: .none,
                     prewarm: true,
-                    load: true,
-                    download: true
+                    load: true
                 )
-
-                downloadProgress = 1.0
             }
 
             setupStatus = "Ready!"
@@ -194,5 +205,23 @@ class TranscriptionEngine: ObservableObject {
         }
 
         return result
+    }
+
+    /// Recursively search for an existing model folder containing AudioEncoder.mlmodelc
+    private func findExistingModel(in directory: URL) -> URL? {
+        let fileManager = FileManager.default
+        guard let enumerator = fileManager.enumerator(
+            at: directory,
+            includingPropertiesForKeys: [.isDirectoryKey],
+            options: [.skipsHiddenFiles]
+        ) else { return nil }
+
+        while let url = enumerator.nextObject() as? URL {
+            if url.lastPathComponent == "AudioEncoder.mlmodelc" {
+                // Return the parent folder (the model folder)
+                return url.deletingLastPathComponent()
+            }
+        }
+        return nil
     }
 }

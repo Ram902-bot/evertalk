@@ -22,10 +22,16 @@ struct OverlayView: View {
                     if !isMinimal {
                         // Status indicator
                         if appState.status == .settingUp {
-                            // Spinning loader for setup
-                            ProgressView()
-                                .scaleEffect(0.6)
-                                .frame(width: 12, height: 12)
+                            // Download progress or loading spinner
+                            if appState.transcriptionEngine.isDownloading && appState.transcriptionEngine.downloadProgress < 1.0 {
+                                // Progress bar for downloading
+                                DownloadProgressView(progress: appState.transcriptionEngine.downloadProgress)
+                            } else {
+                                // Spinning loader for other setup states
+                                ProgressView()
+                                    .scaleEffect(0.6)
+                                    .frame(width: 12, height: 12)
+                            }
                         } else if appState.status == .recording {
                             Circle()
                                 .fill(Color.red)
@@ -112,6 +118,10 @@ struct OverlayView: View {
     var displayText: String {
         switch appState.status {
         case .settingUp:
+            if appState.transcriptionEngine.isDownloading && appState.transcriptionEngine.downloadProgress < 1.0 {
+                let percent = Int(appState.transcriptionEngine.downloadProgress * 100)
+                return "Downloading... \(percent)%"
+            }
             return appState.transcriptionEngine.setupStatus
         case .idle:
             return "Evertalk"
@@ -124,6 +134,9 @@ struct OverlayView: View {
 
     var pillWidth: CGFloat {
         if appState.status == .settingUp {
+            if appState.transcriptionEngine.isDownloading && appState.transcriptionEngine.downloadProgress < 1.0 {
+                return 200  // Wider for progress bar
+            }
             return 180  // Wider for setup text
         } else if appState.status == .recording {
             return 115
@@ -143,6 +156,30 @@ struct OverlayView: View {
             return 26
         } else {
             return 5  // Thin line
+        }
+    }
+}
+
+// Download progress bar
+struct DownloadProgressView: View {
+    let progress: Double
+
+    var body: some View {
+        ZStack(alignment: .leading) {
+            // Background track
+            RoundedRectangle(cornerRadius: 2)
+                .fill(Color.white.opacity(0.2))
+                .frame(width: 50, height: 4)
+
+            // Progress fill
+            RoundedRectangle(cornerRadius: 2)
+                .fill(LinearGradient(
+                    colors: [Color.blue, Color.purple],
+                    startPoint: .leading,
+                    endPoint: .trailing
+                ))
+                .frame(width: max(4, 50 * progress), height: 4)
+                .animation(.easeInOut(duration: 0.2), value: progress)
         }
     }
 }
