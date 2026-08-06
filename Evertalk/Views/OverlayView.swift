@@ -42,16 +42,18 @@ struct OverlayView: View {
                                 }
                             }
                         } else {
-                            // Blue dot for idle hover
-                            Circle()
-                                .fill(LinearGradient(colors: [.blue, .purple], startPoint: .topLeading, endPoint: .bottomTrailing))
-                                .frame(width: 6, height: 6)
+                            // Mic icon for idle
+                            Image(systemName: "mic.fill")
+                                .font(.system(size: 14, weight: .medium))
+                                .foregroundStyle(LinearGradient(colors: [.blue, .purple], startPoint: .topLeading, endPoint: .bottomTrailing))
                         }
 
-                        // Text
-                        Text(displayText)
-                            .font(.system(size: 11, weight: .medium))
-                            .foregroundColor(.primary.opacity(0.9))
+                        // Text (not shown for idle)
+                        if appState.status != .idle {
+                            Text(displayText)
+                                .font(.system(size: 11, weight: .medium))
+                                .foregroundColor(.primary.opacity(0.9))
+                        }
                     }
                 }
                 .padding(.horizontal, isMinimal ? 0 : 12)
@@ -128,7 +130,7 @@ struct OverlayView: View {
         } else if appState.status == .transcribing {
             return 120
         } else if isHovering {
-            return 95
+            return 48  // Just mic icon
         } else {
             return 40  // Thin line
         }
