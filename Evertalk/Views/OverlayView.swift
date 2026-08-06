@@ -126,8 +126,8 @@ class OverlayWindowController: NSWindowController {
 
         window.isOpaque = false
         window.backgroundColor = .clear
-        window.level = .floating
-        window.collectionBehavior = [.canJoinAllSpaces, .fullScreenAuxiliary]
+        window.level = .screenSaver  // Stay above Dock and desktop icons
+        window.collectionBehavior = [.canJoinAllSpaces, .fullScreenAuxiliary, .stationary]
         window.isMovableByWindowBackground = false  // Prevent accidental dragging
         window.hasShadow = false
 
