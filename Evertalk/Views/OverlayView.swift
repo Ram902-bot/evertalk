@@ -8,56 +8,57 @@ struct OverlayView: View {
     var body: some View {
         Button(action: { onTap?() }) {
             ZStack {
-                if isMinimal {
-                    // Tiny dot when idle and not hovered
-                    Circle()
-                        .fill(Color(red: 0.118, green: 0.333, blue: 0.976).opacity(0.6))
-                        .frame(width: 8, height: 8)
-                } else if isExpanded {
-                    // Pill when recording/transcribing or hovered
-                    Capsule()
-                        .fill(.ultraThinMaterial)
-                        .shadow(color: .black.opacity(0.15), radius: 4)
-                } else {
-                    // Small circle with mic when hovered
-                    Circle()
-                        .fill(.ultraThinMaterial)
-                        .shadow(color: .black.opacity(0.15), radius: 4)
-                }
+                // Background shape
+                Capsule()
+                    .fill(backgroundFill)
+                    .overlay(
+                        Capsule()
+                            .strokeBorder(borderGradient, lineWidth: appState.status == .recording ? 2 : 0)
+                    )
+                    .shadow(color: shadowColor, radius: isMinimal ? 0 : 8)
 
-                if !isMinimal {
-                    HStack(spacing: 6) {
-                        // Mic icon
-                        ZStack {
+                // Content
+                HStack(spacing: 6) {
+                    if !isMinimal {
+                        // Recording indicator dot
+                        if appState.status == .recording {
                             Circle()
-                                .fill(backgroundColor)
-                                .frame(width: iconSize, height: iconSize)
-
-                            Image(systemName: iconName)
-                                .font(.system(size: iconSize * 0.45, weight: .medium))
-                                .foregroundColor(.white)
-                                .symbolEffect(.pulse, isActive: appState.status == .recording)
+                                .fill(Color.red)
+                                .frame(width: 8, height: 8)
+                                .modifier(PulseAnimation())
+                        } else if appState.status == .transcribing {
+                            // Modern animated dots loader
+                            HStack(spacing: 4) {
+                                ForEach(0..<3) { index in
+                                    Circle()
+                                        .fill(everstageBlue)
+                                        .frame(width: 6, height: 6)
+                                        .modifier(BouncingDot(delay: Double(index) * 0.15))
+                                }
+                            }
+                        } else {
+                            // Blue dot for idle hover
+                            Circle()
+                                .fill(LinearGradient(colors: [.blue, .purple], startPoint: .topLeading, endPoint: .bottomTrailing))
+                                .frame(width: 6, height: 6)
                         }
 
-                        // Status text (show when recording/transcribing)
-                        if appState.status != .idle {
-                            Text(statusText)
-                                .font(.system(size: 11, weight: .medium))
-                                .foregroundColor(.primary)
-                                .transition(.opacity.combined(with: .move(edge: .leading)))
-                        }
+                        // Text
+                        Text(displayText)
+                            .font(.system(size: 11, weight: .medium))
+                            .foregroundColor(.primary.opacity(0.9))
                     }
-                    .padding(.horizontal, isExpanded ? 8 : 4)
-                    .padding(.vertical, 4)
                 }
+                .padding(.horizontal, isMinimal ? 0 : 12)
+                .padding(.vertical, isMinimal ? 0 : 6)
             }
             .frame(width: pillWidth, height: pillHeight)
-            .animation(.easeInOut(duration: 0.2), value: isHovering)
-            .animation(.easeInOut(duration: 0.2), value: appState.status)
+            .animation(.spring(response: 0.3, dampingFraction: 0.7), value: isHovering)
+            .animation(.spring(response: 0.3, dampingFraction: 0.7), value: appState.status)
         }
         .buttonStyle(.plain)
         .onHover { hovering in
-            withAnimation(.easeInOut(duration: 0.2)) {
+            withAnimation(.spring(response: 0.3, dampingFraction: 0.7)) {
                 isHovering = hovering
             }
         }
@@ -67,67 +68,107 @@ struct OverlayView: View {
         appState.status == .idle && !isHovering
     }
 
-    var isExpanded: Bool {
-        appState.status != .idle
+    var backgroundFill: some ShapeStyle {
+        if isMinimal {
+            return AnyShapeStyle(LinearGradient(
+                colors: [Color.blue.opacity(0.7), Color.purple.opacity(0.7)],
+                startPoint: .leading,
+                endPoint: .trailing
+            ))
+        } else {
+            return AnyShapeStyle(Material.ultraThinMaterial)
+        }
     }
 
-    var iconSize: CGFloat {
-        isExpanded ? 24 : 20
+    var everstageBlue: Color {
+        Color(red: 0.118, green: 0.333, blue: 0.976)
     }
 
-    var pillWidth: CGFloat {
+    var borderGradient: LinearGradient {
+        LinearGradient(
+            colors: [everstageBlue, everstageBlue.opacity(0.7), everstageBlue],
+            startPoint: .leading,
+            endPoint: .trailing
+        )
+    }
+
+    var shadowColor: Color {
         if appState.status == .recording {
-            return 110
-        } else if appState.status == .transcribing {
-            return 120
-        } else if isHovering {
-            return 28  // Small circle with mic
+            return everstageBlue.opacity(0.4)
+        } else if isMinimal {
+            return .clear
         } else {
-            return 8   // Tiny dot
+            return .black.opacity(0.15)
         }
     }
 
-    var pillHeight: CGFloat {
-        if appState.status != .idle {
-            return 32
-        } else if isHovering {
-            return 28
-        } else {
-            return 8  // Tiny dot
-        }
-    }
-
-    var backgroundColor: Color {
+    var displayText: String {
         switch appState.status {
         case .idle:
-            return Color(red: 0.118, green: 0.333, blue: 0.976) // Everstage blue
-        case .recording:
-            return .red
-        case .transcribing:
-            return .orange
-        }
-    }
-
-    var iconName: String {
-        switch appState.status {
-        case .idle:
-            return "mic.fill"
-        case .recording:
-            return "stop.fill"
-        case .transcribing:
-            return "ellipsis"
-        }
-    }
-
-    var statusText: String {
-        switch appState.status {
-        case .idle:
-            return "Speak"
+            return "Evertalk"
         case .recording:
             return "Recording..."
         case .transcribing:
             return "Transcribing..."
         }
+    }
+
+    var pillWidth: CGFloat {
+        if appState.status == .recording {
+            return 115
+        } else if appState.status == .transcribing {
+            return 120
+        } else if isHovering {
+            return 95
+        } else {
+            return 40  // Thin line
+        }
+    }
+
+    var pillHeight: CGFloat {
+        if appState.status != .idle {
+            return 28
+        } else if isHovering {
+            return 26
+        } else {
+            return 5  // Thin line
+        }
+    }
+}
+
+// Pulse animation modifier
+struct PulseAnimation: ViewModifier {
+    @State private var isPulsing = false
+
+    func body(content: Content) -> some View {
+        content
+            .scaleEffect(isPulsing ? 1.2 : 1.0)
+            .opacity(isPulsing ? 0.7 : 1.0)
+            .onAppear {
+                withAnimation(.easeInOut(duration: 0.6).repeatForever(autoreverses: true)) {
+                    isPulsing = true
+                }
+            }
+    }
+}
+
+// Bouncing dot animation for loader
+struct BouncingDot: ViewModifier {
+    let delay: Double
+    @State private var isAnimating = false
+
+    func body(content: Content) -> some View {
+        content
+            .offset(y: isAnimating ? -4 : 2)
+            .animation(
+                .easeInOut(duration: 0.4)
+                .repeatForever(autoreverses: true)
+                .delay(delay),
+                value: isAnimating
+            )
+            .onAppear {
+                isAnimating = true
+            }
     }
 }
 
