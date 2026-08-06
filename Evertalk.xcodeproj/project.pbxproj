@@ -1,0 +1,401 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 77;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		11166B735842FB1EE09D761E /* AppState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46E0AB8E0222E641F13AE5B5 /* AppState.swift */; };
+		25A26A7198D510A47CA7F6E1 /* PasteManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C962A29F9C703037C20D2ED /* PasteManager.swift */; };
+		2BA7E42B68EF0737EEB59E64 /* AudioEngine.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC9F092E17B21341B9E5C66B /* AudioEngine.swift */; };
+		754C2E1C408D479C8B77EED4 /* MenuBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A00B1EEE889D997BAE7B9050 /* MenuBarView.swift */; };
+		7BF060B7AAC01BA76C664982 /* EvertalkApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4D0324BA5F480363F7359C7 /* EvertalkApp.swift */; };
+		96A572328EFC4BF5CCB571ED /* OverlayView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF4BBD74DDC11273F54E2A0B /* OverlayView.swift */; };
+		B8B2C64A40E962E7A7B1CDDE /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 045BDF4FF987F8607844A354 /* Assets.xcassets */; };
+		BD2B497A44C93E0B221D6555 /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48CCBE775B183418595D2C0D /* SettingsView.swift */; };
+		C8E15AD893B68D16191975A6 /* WhisperKit in Frameworks */ = {isa = PBXBuildFile; productRef = A794ECF4A623E194E8EE0F98 /* WhisperKit */; };
+		D6D5B93F4E0AF72386BC75F3 /* HotkeyManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73E6263B52EEA8F220761D5C /* HotkeyManager.swift */; };
+		E3D30C80325139C09776E2F2 /* TranscriptionEngine.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF418B0ACA0938DC956B947A /* TranscriptionEngine.swift */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		045BDF4FF987F8607844A354 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		3204F702F0E42D56C81CC148 /* Evertalk.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Evertalk.entitlements; sourceTree = "<group>"; };
+		46E0AB8E0222E641F13AE5B5 /* AppState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppState.swift; sourceTree = "<group>"; };
+		48CCBE775B183418595D2C0D /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
+		4C962A29F9C703037C20D2ED /* PasteManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PasteManager.swift; sourceTree = "<group>"; };
+		73E6263B52EEA8F220761D5C /* HotkeyManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HotkeyManager.swift; sourceTree = "<group>"; };
+		7BCC2A2CE7441614691FAB2D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
+		8F70E5D37B58BF424E7B4867 /* Evertalk.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Evertalk.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		A00B1EEE889D997BAE7B9050 /* MenuBarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuBarView.swift; sourceTree = "<group>"; };
+		AF418B0ACA0938DC956B947A /* TranscriptionEngine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TranscriptionEngine.swift; sourceTree = "<group>"; };
+		AF4BBD74DDC11273F54E2A0B /* OverlayView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OverlayView.swift; sourceTree = "<group>"; };
+		C4D0324BA5F480363F7359C7 /* EvertalkApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EvertalkApp.swift; sourceTree = "<group>"; };
+		EC9F092E17B21341B9E5C66B /* AudioEngine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AudioEngine.swift; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		F2A91A2B7AA5EB95D35981BA /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				C8E15AD893B68D16191975A6 /* WhisperKit in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		18DCAAD9EE481150D921ABE8 /* Evertalk */ = {
+			isa = PBXGroup;
+			children = (
+				46E0AB8E0222E641F13AE5B5 /* AppState.swift */,
+				045BDF4FF987F8607844A354 /* Assets.xcassets */,
+				3204F702F0E42D56C81CC148 /* Evertalk.entitlements */,
+				C4D0324BA5F480363F7359C7 /* EvertalkApp.swift */,
+				7BCC2A2CE7441614691FAB2D /* Info.plist */,
+				783BD0391B6045269E340708 /* Managers */,
+				93EC484E34F65D45D5199881 /* Views */,
+			);
+			path = Evertalk;
+			sourceTree = "<group>";
+		};
+		677CA044B5C341B96AB774A7 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				8F70E5D37B58BF424E7B4867 /* Evertalk.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		783BD0391B6045269E340708 /* Managers */ = {
+			isa = PBXGroup;
+			children = (
+				EC9F092E17B21341B9E5C66B /* AudioEngine.swift */,
+				73E6263B52EEA8F220761D5C /* HotkeyManager.swift */,
+				4C962A29F9C703037C20D2ED /* PasteManager.swift */,
+				AF418B0ACA0938DC956B947A /* TranscriptionEngine.swift */,
+			);
+			path = Managers;
+			sourceTree = "<group>";
+		};
+		899FA7BB9952AEC2630FFF2E = {
+			isa = PBXGroup;
+			children = (
+				18DCAAD9EE481150D921ABE8 /* Evertalk */,
+				677CA044B5C341B96AB774A7 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		93EC484E34F65D45D5199881 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				A00B1EEE889D997BAE7B9050 /* MenuBarView.swift */,
+				AF4BBD74DDC11273F54E2A0B /* OverlayView.swift */,
+				48CCBE775B183418595D2C0D /* SettingsView.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		3CDC8CBBF864811C95EEEB6E /* Evertalk */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 1F722269363EE9F8361C90F6 /* Build configuration list for PBXNativeTarget "Evertalk" */;
+			buildPhases = (
+				96CC0EDB41795678E860DE38 /* Sources */,
+				BF562B86EFD9685431A705A2 /* Resources */,
+				F2A91A2B7AA5EB95D35981BA /* Frameworks */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = Evertalk;
+			packageProductDependencies = (
+				A794ECF4A623E194E8EE0F98 /* WhisperKit */,
+			);
+			productName = Evertalk;
+			productReference = 8F70E5D37B58BF424E7B4867 /* Evertalk.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		5F9B201CA9F9D2286AA273A8 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				BuildIndependentTargetsInParallel = YES;
+				LastUpgradeCheck = 1500;
+				TargetAttributes = {
+					3CDC8CBBF864811C95EEEB6E = {
+						DevelopmentTeam = "";
+						ProvisioningStyle = Automatic;
+					};
+				};
+			};
+			buildConfigurationList = 940497C2011CE9A45CA639D6 /* Build configuration list for PBXProject "Evertalk" */;
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				Base,
+				en,
+			);
+			mainGroup = 899FA7BB9952AEC2630FFF2E;
+			minimizedProjectReferenceProxies = 1;
+			packageReferences = (
+				9D61D099908129A89D76097F /* XCRemoteSwiftPackageReference "WhisperKit" */,
+			);
+			preferredProjectObjectVersion = 77;
+			productRefGroup = 677CA044B5C341B96AB774A7 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				3CDC8CBBF864811C95EEEB6E /* Evertalk */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		BF562B86EFD9685431A705A2 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				B8B2C64A40E962E7A7B1CDDE /* Assets.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		96CC0EDB41795678E860DE38 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				11166B735842FB1EE09D761E /* AppState.swift in Sources */,
+				2BA7E42B68EF0737EEB59E64 /* AudioEngine.swift in Sources */,
+				7BF060B7AAC01BA76C664982 /* EvertalkApp.swift in Sources */,
+				D6D5B93F4E0AF72386BC75F3 /* HotkeyManager.swift in Sources */,
+				754C2E1C408D479C8B77EED4 /* MenuBarView.swift in Sources */,
+				96A572328EFC4BF5CCB571ED /* OverlayView.swift in Sources */,
+				25A26A7198D510A47CA7F6E1 /* PasteManager.swift in Sources */,
+				BD2B497A44C93E0B221D6555 /* SettingsView.swift in Sources */,
+				E3D30C80325139C09776E2F2 /* TranscriptionEngine.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin XCBuildConfiguration section */
+		83165E9DA7405AD93F601716 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 14.0;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = macosx;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
+				SWIFT_VERSION = 5.0;
+			};
+			name = Release;
+		};
+		A5F7A3F39FA83F4F9E34F70C /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = Evertalk/Evertalk.entitlements;
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = "";
+				ENABLE_HARDENED_RUNTIME = YES;
+				INFOPLIST_FILE = Evertalk/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+				);
+				MACOSX_DEPLOYMENT_TARGET = 14.0;
+				MARKETING_VERSION = 2.0.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.everstage.evertalk;
+				SDKROOT = macosx;
+				SWIFT_VERSION = 5.9;
+			};
+			name = Debug;
+		};
+		AC6F12292E507D29DE052359 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = Evertalk/Evertalk.entitlements;
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = "";
+				ENABLE_HARDENED_RUNTIME = YES;
+				INFOPLIST_FILE = Evertalk/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+				);
+				MACOSX_DEPLOYMENT_TARGET = 14.0;
+				MARKETING_VERSION = 2.0.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.everstage.evertalk;
+				SDKROOT = macosx;
+				SWIFT_VERSION = 5.9;
+			};
+			name = Release;
+		};
+		CB634BB6D50CA3772E8DAF8C /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"$(inherited)",
+					"DEBUG=1",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 14.0;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = macosx;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 5.0;
+			};
+			name = Debug;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		1F722269363EE9F8361C90F6 /* Build configuration list for PBXNativeTarget "Evertalk" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				A5F7A3F39FA83F4F9E34F70C /* Debug */,
+				AC6F12292E507D29DE052359 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
+		};
+		940497C2011CE9A45CA639D6 /* Build configuration list for PBXProject "Evertalk" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				CB634BB6D50CA3772E8DAF8C /* Debug */,
+				83165E9DA7405AD93F601716 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
+		};
+/* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		9D61D099908129A89D76097F /* XCRemoteSwiftPackageReference "WhisperKit" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/argmaxinc/WhisperKit";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 0.9.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		A794ECF4A623E194E8EE0F98 /* WhisperKit */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 9D61D099908129A89D76097F /* XCRemoteSwiftPackageReference "WhisperKit" */;
+			productName = WhisperKit;
+		};
+/* End XCSwiftPackageProductDependency section */
+	};
+	rootObject = 5F9B201CA9F9D2286AA273A8 /* Project object */;
+}
