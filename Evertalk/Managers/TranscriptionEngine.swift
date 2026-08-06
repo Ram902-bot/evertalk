@@ -93,6 +93,61 @@ class TranscriptionEngine {
             return ""
         }
 
+        // Remove common hallucinations (Whisper trained on YouTube)
+        let hallucinations = [
+            "thank you for watching",
+            "thanks for watching",
+            "please subscribe",
+            "like and subscribe",
+            "subtitles by the amara.org community",
+            "subtitles by the amara org community",
+            "satsang with mooji",
+            "transcribed by https://otter.ai",
+            "www.mooji.org"
+        ]
+
+        let lowerText = text.lowercased()
+        for hallucination in hallucinations {
+            if lowerText == hallucination || lowerText.hasPrefix(hallucination + ".") || lowerText.hasPrefix(hallucination + "!") {
+                return ""
+            }
+        }
+
+        // Fix common homophones
+        text = fixHomophones(text)
+
         return text
+    }
+
+    private func fixHomophones(_ text: String) -> String {
+        var result = text
+
+        // "High" at start of sentence or after punctuation → "Hi"
+        // Matches: "High," "High!" "High." or "High " at start
+        let patterns: [(pattern: String, replacement: String)] = [
+            ("^High,", "Hi,"),
+            ("^High!", "Hi!"),
+            ("^High\\.", "Hi."),
+            ("^High ", "Hi "),
+            ("\\. High,", ". Hi,"),
+            ("\\. High ", ". Hi "),
+            ("! High,", "! Hi,"),
+            ("! High ", "! Hi "),
+            ("\\? High,", "? Hi,"),
+            ("\\? High ", "? Hi ")
+        ]
+
+        for (pattern, replacement) in patterns {
+            if let regex = try? NSRegularExpression(pattern: pattern, options: []) {
+                result = regex.stringByReplacingMatches(
+                    in: result,
+                    options: [],
+                    range: NSRange(result.startIndex..., in: result),
+                    withTemplate: replacement
+                )
+            }
+        }
+
+        return result
     }
 }
