@@ -13,27 +13,11 @@ Press **Cmd+Shift+Space**, speak, and text appears in your clipboard.
 
 ## Install
 
-### Download the app
-
-1. Download `Evertalk.app` from [Releases](https://github.com/everstage/evertalk/releases)
-2. Drag to Applications
-3. Open Evertalk
-4. Grant Microphone permission when prompted
-
-### Build from source
-
 ```bash
-# Clone
-git clone https://github.com/everstage/evertalk.git
-cd evertalk
-
-# Open in Xcode
-open Evertalk.xcodeproj
-
-# Build (Cmd+B) and Run (Cmd+R)
+brew install --cask Ram902-bot/tap/evertalk
 ```
 
-Requires Xcode 15+ and macOS 14+.
+On first launch, grant Microphone permission when prompted.
 
 ## Usage
 
@@ -60,19 +44,16 @@ The mic icon in your menu bar shows status:
 - **WhisperKit** - Apple-optimized Whisper model
 - **Whisper base.en** - ~140MB model, good accuracy
 
-## CLI Version
-
-A lightweight CLI version is also available:
+## Build from Source
 
 ```bash
-# Install dependencies
-brew install sox whisper-cpp
-
-# Run
-./evertalk.sh
+git clone https://github.com/Ram902-bot/evertalk.git
+cd evertalk
+open Evertalk.xcodeproj
+# Build (Cmd+B) and Run (Cmd+R)
 ```
 
-See `evertalk.sh` for details.
+Requires Xcode 15+ and macOS 14+.
 
 ## License
 
@@ -80,7 +61,6 @@ MIT License - see [LICENSE](LICENSE)
 
 ### Third-Party Licenses
 
-This project uses:
 - [WhisperKit](https://github.com/argmaxinc/WhisperKit) - MIT License
 - [Whisper](https://github.com/openai/whisper) - MIT License
 
