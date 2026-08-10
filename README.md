@@ -13,11 +13,25 @@ Press **Cmd+Shift+Space**, speak, and text appears in your clipboard.
 
 ## Install
 
+### Homebrew (Recommended)
+
 ```bash
 brew install --cask Ram902-bot/tap/evertalk
 ```
 
-On first launch, grant Microphone permission when prompted.
+This handles everything automatically - no manual unzip, no dragging to Applications. Just run the command, grant Mic + Accessibility permissions when prompted, and you're good to go.
+
+**Don't have Homebrew?** Install it first:
+```bash
+/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+```
+
+### Manual download
+
+1. Download `Evertalk.app` from [Releases](https://github.com/Ram902-bot/evertalk/releases)
+2. Drag to Applications
+3. Open Evertalk
+4. Grant Microphone + Accessibility permissions when prompted
 
 ## Usage
 
