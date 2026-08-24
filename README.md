@@ -9,7 +9,7 @@ Press **Cmd+Shift+Space**, speak, and text appears in your clipboard.
 - **Global hotkey** - Cmd+Shift+Space from any app
 - **Fully local** - Whisper AI runs on your Mac, nothing sent to cloud
 - **Fast** - ~2 seconds to transcribe on Apple Silicon
-- **Menu bar app** - Always ready, no window clutter
+- **Lightweight** - Always ready in your dock, quit anytime with Cmd+Q
 
 ## Install
 
