@@ -45,6 +45,7 @@ class TranscriptionEngine: ObservableObject {
                 setupStatus = "Loading model..."
                 downloadProgress = 1.0
                 whisperKit = try await WhisperKit(
+                    downloadBase: modelDir,
                     modelFolder: modelPath.path,
                     verbose: false,
                     logLevel: .none
@@ -69,6 +70,7 @@ class TranscriptionEngine: ObservableObject {
 
                 // Initialize WhisperKit from downloaded folder
                 whisperKit = try await WhisperKit(
+                    downloadBase: modelDir,
                     modelFolder: downloadedFolder.path,
                     verbose: false,
                     logLevel: .none,
