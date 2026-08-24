@@ -32,7 +32,6 @@ build/
 
 # Swift Package Manager
 .swiftpm/
-Package.resolved
 .build/
 
 # CocoaPods (if used)

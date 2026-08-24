@@ -1,6 +1,6 @@
 name: Evertalk
 options:
-  bundleIdPrefix: com.everstage
+  bundleIdPrefix: com.ram902
   deploymentTarget:
     macOS: "14.0"
   xcodeVersion: "15.0"
@@ -20,8 +20,8 @@ targets:
           - "**/.DS_Store"
     settings:
       base:
-        PRODUCT_BUNDLE_IDENTIFIER: com.everstage.evertalk
-        MARKETING_VERSION: "2.0.0"
+        PRODUCT_BUNDLE_IDENTIFIER: com.ram902.evertalk
+        MARKETING_VERSION: "2.1.0"
         CURRENT_PROJECT_VERSION: "1"
         INFOPLIST_FILE: Evertalk/Info.plist
         CODE_SIGN_ENTITLEMENTS: Evertalk/Evertalk.entitlements

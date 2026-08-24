@@ -7,15 +7,15 @@
     <key>CFBundleDisplayName</key>
     <string>Evertalk</string>
     <key>CFBundleIdentifier</key>
-    <string>com.everstage.evertalk</string>
+    <string>com.ram902.evertalk</string>
     <key>CFBundleVersion</key>
     <string>1</string>
     <key>CFBundleShortVersionString</key>
-    <string>2.0.0</string>
+    <string>2.1.0</string>
     <key>LSMinimumSystemVersion</key>
     <string>14.0</string>
     <key>LSUIElement</key>
-    <true/>
+    <false/>
     <key>NSMicrophoneUsageDescription</key>
     <string>Evertalk needs microphone access to transcribe your voice to text.</string>
     <key>NSAppleEventsUsageDescription</key>

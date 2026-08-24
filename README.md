@@ -80,4 +80,4 @@ MIT License - see [LICENSE](LICENSE)
 
 ---
 
-Built by [Everstage](https://everstage.com) team.
+Built by Ram.
