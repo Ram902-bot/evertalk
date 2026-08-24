@@ -2,7 +2,7 @@
 
 # Evertalk - Privacy-first local dictation
 # No network calls. Fully local. Auditable.
-# https://github.com/everstage/evertalk
+# https://github.com/Ram902-bot/evertalk
 
 set -e
 
@@ -18,11 +18,11 @@ BLUE='\033[0;34m'
 YELLOW='\033[0;33m'
 NC='\033[0m' # No Color
 
-# Cleanup on exit
+# Cleanup on exit or interrupt
 cleanup() {
     rm -rf "$TEMP_DIR"
 }
-trap cleanup EXIT
+trap cleanup EXIT INT TERM
 
 # Check dependencies
 check_deps() {
