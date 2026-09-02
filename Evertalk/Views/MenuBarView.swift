@@ -2,6 +2,7 @@ import SwiftUI
 
 struct MenuBarView: View {
     @EnvironmentObject var appState: AppState
+    @Environment(\.openSettings) private var openSettings
 
     var body: some View {
         VStack(alignment: .leading, spacing: 0) {
@@ -36,8 +37,8 @@ struct MenuBarView: View {
             Divider()
 
             // Settings
-            SettingsLink {
-                Text("Settings...")
+            Button("Settings...") {
+                openSettings()
             }
             .buttonStyle(.plain)
             .padding(.horizontal, 12)

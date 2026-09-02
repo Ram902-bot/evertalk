@@ -5,6 +5,7 @@ struct SettingsView: View {
     @EnvironmentObject var appState: AppState
     @State private var launchAtLogin = false
     @State private var playSounds = true
+    @State private var showOverlayEnabled = true
 
     var body: some View {
         Form {
@@ -25,6 +26,31 @@ struct SettingsView: View {
                     }
             } header: {
                 Text("General")
+            }
+
+            Section {
+                Toggle("Show Overlay", isOn: $showOverlayEnabled)
+                    .onChange(of: showOverlayEnabled) { _, newValue in
+                        appState.showOverlayEnabled = newValue
+                        NotificationCenter.default.post(
+                            name: .overlayVisibilityChanged,
+                            object: nil,
+                            userInfo: ["enabled": newValue]
+                        )
+                    }
+
+                if showOverlayEnabled {
+                    Button("Reset Overlay Position") {
+                        NotificationCenter.default.post(name: .resetOverlayPosition, object: nil)
+                    }
+                    .foregroundColor(.blue)
+                }
+
+                Text("The overlay shows recording status. You can drag it anywhere on screen.")
+                    .font(.caption)
+                    .foregroundColor(.secondary)
+            } header: {
+                Text("Overlay")
             }
 
             Section {
@@ -61,10 +87,11 @@ struct SettingsView: View {
             }
         }
         .formStyle(.grouped)
-        .frame(width: 400, height: 350)
+        .frame(width: 400, height: 450)
         .onAppear {
             launchAtLogin = appState.launchAtLogin
             playSounds = appState.playSounds
+            showOverlayEnabled = appState.showOverlayEnabled
         }
     }
 
@@ -80,4 +107,10 @@ struct SettingsView: View {
             print("Failed to set launch at login: \(error)")
         }
     }
+}
+
+// MARK: - Notification Names
+extension Notification.Name {
+    static let overlayVisibilityChanged = Notification.Name("overlayVisibilityChanged")
+    static let resetOverlayPosition = Notification.Name("resetOverlayPosition")
 }

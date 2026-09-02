@@ -3,11 +3,11 @@ import SwiftUI
 struct OverlayView: View {
     @EnvironmentObject var appState: AppState
     @State private var isHovering = false
+    @State private var didDrag = false
     var onTap: (() -> Void)?
 
     var body: some View {
-        Button(action: { onTap?() }) {
-            ZStack {
+        ZStack {
                 // Background shape
                 Capsule()
                     .fill(backgroundFill)
@@ -64,15 +64,32 @@ struct OverlayView: View {
                 }
                 .padding(.horizontal, isMinimal ? 0 : 12)
                 .padding(.vertical, isMinimal ? 0 : 6)
-            }
-            .frame(width: pillWidth, height: pillHeight)
-            .animation(.spring(response: 0.3, dampingFraction: 0.7), value: isHovering)
-            .animation(.spring(response: 0.3, dampingFraction: 0.7), value: appState.status)
         }
-        .buttonStyle(.plain)
+        .frame(width: pillWidth, height: pillHeight)
+        .animation(.spring(response: 0.3, dampingFraction: 0.7), value: isHovering)
+        .animation(.spring(response: 0.3, dampingFraction: 0.7), value: appState.status)
+        .contentShape(Capsule())
         .onHover { hovering in
             withAnimation(.spring(response: 0.3, dampingFraction: 0.7)) {
                 isHovering = hovering
+            }
+        }
+        .simultaneousGesture(
+            DragGesture(minimumDistance: 3)
+                .onChanged { _ in
+                    didDrag = true
+                }
+                .onEnded { _ in
+                    // Reset after a short delay to allow tap detection to complete
+                    DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
+                        didDrag = false
+                    }
+                }
+        )
+        .onTapGesture {
+            // Only trigger if we didn't drag
+            if !didDrag {
+                onTap?()
             }
         }
     }
@@ -220,8 +237,8 @@ struct BouncingDot: ViewModifier {
     }
 }
 
-// Overlay window controller - positioned at bottom center
-class OverlayWindowController: NSWindowController {
+// Overlay window controller - draggable, position persisted
+class OverlayWindowController: NSWindowController, NSWindowDelegate {
     private var appState: AppState?
 
     convenience init(appState: AppState) {
@@ -236,11 +253,12 @@ class OverlayWindowController: NSWindowController {
         window.backgroundColor = .clear
         window.level = .screenSaver  // Stay above Dock and desktop icons
         window.collectionBehavior = [.canJoinAllSpaces, .fullScreenAuxiliary, .stationary]
-        window.isMovableByWindowBackground = false  // Prevent accidental dragging
+        window.isMovableByWindowBackground = true  // Allow dragging to reposition
         window.hasShadow = false
 
         self.init(window: window)
         self.appState = appState
+        window.delegate = self
 
         let hostingView = NSHostingView(rootView:
             OverlayView(onTap: { [weak self] in
@@ -250,7 +268,34 @@ class OverlayWindowController: NSWindowController {
         )
         window.contentView = hostingView
 
-        positionAtBottomCenter()
+        restorePosition()
+    }
+
+    func windowDidMove(_ notification: Notification) {
+        savePosition()
+    }
+
+    private func savePosition() {
+        guard let window = window, let appState = appState else { return }
+        let origin = window.frame.origin
+        appState.overlayPositionX = origin.x
+        appState.overlayPositionY = origin.y
+    }
+
+    private func restorePosition() {
+        guard let appState = appState else {
+            positionAtBottomCenter()
+            return
+        }
+
+        // If no saved position, use default
+        if appState.overlayPositionX < 0 || appState.overlayPositionY < 0 {
+            positionAtBottomCenter()
+            return
+        }
+
+        // Restore saved position
+        window?.setFrameOrigin(NSPoint(x: appState.overlayPositionX, y: appState.overlayPositionY))
     }
 
     func positionAtBottomCenter() {
@@ -264,10 +309,15 @@ class OverlayWindowController: NSWindowController {
         let y = screenFrame.origin.y + 20  // 20px from bottom
 
         window.setFrameOrigin(NSPoint(x: x, y: y))
+        savePosition()
+    }
+
+    func resetPosition() {
+        positionAtBottomCenter()
     }
 
     func show() {
-        positionAtBottomCenter()
+        restorePosition()
         window?.orderFront(nil)
     }
 

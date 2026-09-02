@@ -47,9 +47,42 @@ class AppDelegate: NSObject, NSApplicationDelegate {
             }
         }
 
-        // Setup overlay window and show it always
+        // Setup overlay window
         overlayWindow = OverlayWindowController(appState: appState)
-        overlayWindow?.show()
+
+        // Only show overlay if enabled in settings
+        if appState.showOverlayEnabled {
+            overlayWindow?.show()
+        }
+
+        // Listen for overlay visibility changes from Settings
+        NotificationCenter.default.addObserver(
+            self,
+            selector: #selector(handleOverlayVisibilityChanged(_:)),
+            name: .overlayVisibilityChanged,
+            object: nil
+        )
+
+        // Listen for reset position request
+        NotificationCenter.default.addObserver(
+            self,
+            selector: #selector(handleResetOverlayPosition),
+            name: .resetOverlayPosition,
+            object: nil
+        )
+    }
+
+    @objc private func handleOverlayVisibilityChanged(_ notification: Notification) {
+        guard let enabled = notification.userInfo?["enabled"] as? Bool else { return }
+        if enabled {
+            overlayWindow?.show()
+        } else {
+            overlayWindow?.hide()
+        }
+    }
+
+    @objc private func handleResetOverlayPosition() {
+        overlayWindow?.resetPosition()
     }
 
     private func requestAccessibilityPermission() {

@@ -18,6 +18,11 @@ class AppState: ObservableObject {
     // Settings
     @AppStorage("launchAtLogin") var launchAtLogin: Bool = false
     @AppStorage("playSounds") var playSounds: Bool = true
+    @AppStorage("showOverlayEnabled") var showOverlayEnabled: Bool = true
+
+    // Overlay position persistence
+    @AppStorage("overlayPositionX") var overlayPositionX: Double = -1
+    @AppStorage("overlayPositionY") var overlayPositionY: Double = -1
 
     let audioEngine = AudioEngine()
     let transcriptionEngine = TranscriptionEngine()
