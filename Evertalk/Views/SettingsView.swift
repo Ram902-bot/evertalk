@@ -55,12 +55,12 @@ struct SettingsView: View {
 
             Section {
                 LabeledContent("Model") {
-                    Text("Whisper Base (English)")
+                    Text("Whisper Small (English)")
                         .foregroundColor(.secondary)
                 }
 
                 LabeledContent("Model Size") {
-                    Text("~140 MB")
+                    Text("~470 MB")
                         .foregroundColor(.secondary)
                 }
             } header: {
@@ -68,7 +68,7 @@ struct SettingsView: View {
             }
 
             Section {
-                Text("All audio is processed locally on your Mac. Nothing is sent to the cloud.")
+                Text("All audio is transcribed on your Mac and never leaves it. The internet is only used to download the model once and to check for app updates.")
                     .font(.caption)
                     .foregroundColor(.secondary)
             } header: {
@@ -77,11 +77,11 @@ struct SettingsView: View {
 
             Section {
                 LabeledContent("Version") {
-                    Text("2.0.0")
+                    Text(appState.updateChecker.currentVersion)
                         .foregroundColor(.secondary)
                 }
 
-                Link("View on GitHub", destination: URL(string: "https://github.com/everstage/evertalk")!)
+                Link("View on GitHub", destination: URL(string: "https://github.com/Ram902-bot/evertalk")!)
             } header: {
                 Text("About")
             }
