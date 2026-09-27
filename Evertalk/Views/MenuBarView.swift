@@ -17,6 +17,24 @@ struct MenuBarView: View {
             .padding(.horizontal, 12)
             .padding(.vertical, 8)
 
+            if appState.status == .setupFailed {
+                if let error = appState.transcriptionEngine.setupError {
+                    Text(error)
+                        .font(.system(size: 11))
+                        .foregroundColor(.secondary)
+                        .lineLimit(3)
+                        .padding(.horizontal, 12)
+                        .padding(.bottom, 6)
+                }
+
+                Button("Retry Setup") {
+                    appState.retrySetup()
+                }
+                .buttonStyle(.plain)
+                .padding(.horizontal, 12)
+                .padding(.vertical, 6)
+            }
+
             Divider()
 
             // Start/Stop Recording
@@ -32,7 +50,7 @@ struct MenuBarView: View {
             .buttonStyle(.plain)
             .padding(.horizontal, 12)
             .padding(.vertical, 6)
-            .disabled(appState.status == .transcribing || appState.status == .settingUp)
+            .disabled(appState.status == .transcribing || appState.status == .settingUp || appState.status == .setupFailed)
 
             Divider()
 
@@ -61,6 +79,8 @@ struct MenuBarView: View {
         switch appState.status {
         case .settingUp:
             return .blue
+        case .setupFailed:
+            return .orange
         case .idle:
             return .gray
         case .recording:
@@ -74,6 +94,8 @@ struct MenuBarView: View {
         switch appState.status {
         case .settingUp:
             return "Setting up..."
+        case .setupFailed:
+            return "Setup failed"
         case .idle:
             return "Ready"
         case .recording:

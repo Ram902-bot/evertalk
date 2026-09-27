@@ -3,6 +3,7 @@ import Combine
 
 enum RecordingStatus {
     case settingUp
+    case setupFailed
     case idle
     case recording
     case transcribing
@@ -44,6 +45,33 @@ class AppState: ObservableObject {
                 }
             }
             .store(in: &cancellables)
+
+        // Surface setup failures so the UI leaves the spinner and offers a retry
+        transcriptionEngine.$setupFailed
+            .receive(on: DispatchQueue.main)
+            .sink { [weak self] failed in
+                guard let self else { return }
+                if failed {
+                    self.status = .setupFailed
+                    self.showOverlay = true
+                } else if self.status == .setupFailed {
+                    self.status = .settingUp
+                }
+            }
+            .store(in: &cancellables)
+
+        // Views observe AppState; forward engine changes (progress, status text) so they redraw
+        transcriptionEngine.objectWillChange
+            .receive(on: DispatchQueue.main)
+            .sink { [weak self] _ in
+                self?.objectWillChange.send()
+            }
+            .store(in: &cancellables)
+    }
+
+    func retrySetup() {
+        guard status == .setupFailed else { return }
+        transcriptionEngine.retrySetup()
     }
 
     func toggleRecording() {
@@ -51,6 +79,8 @@ class AppState: ObservableObject {
         case .settingUp:
             // Ignore while setting up
             break
+        case .setupFailed:
+            retrySetup()
         case .idle:
             startRecording()
         case .recording:

@@ -2,23 +2,23 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
-    <key>CFBundleName</key>
-    <string>Evertalk</string>
-    <key>CFBundleDisplayName</key>
-    <string>Evertalk</string>
-    <key>CFBundleIdentifier</key>
-    <string>com.ram902.evertalk</string>
-    <key>CFBundleVersion</key>
-    <string>1</string>
-    <key>CFBundleShortVersionString</key>
-    <string>2.1.2</string>
-    <key>LSMinimumSystemVersion</key>
-    <string>14.0</string>
-    <key>LSUIElement</key>
-    <false/>
-    <key>NSMicrophoneUsageDescription</key>
-    <string>Evertalk needs microphone access to transcribe your voice to text.</string>
-    <key>NSAppleEventsUsageDescription</key>
-    <string>Evertalk needs automation access to paste text into other applications.</string>
+	<key>CFBundleDisplayName</key>
+	<string>Evertalk</string>
+	<key>CFBundleIdentifier</key>
+	<string>com.ram902.evertalk</string>
+	<key>CFBundleName</key>
+	<string>Evertalk</string>
+	<key>CFBundleShortVersionString</key>
+	<string>2.2.1</string>
+	<key>CFBundleVersion</key>
+	<string>2</string>
+	<key>LSMinimumSystemVersion</key>
+	<string>14.0</string>
+	<key>LSUIElement</key>
+	<false/>
+	<key>NSAppleEventsUsageDescription</key>
+	<string>Evertalk needs automation access to paste text into other applications.</string>
+	<key>NSMicrophoneUsageDescription</key>
+	<string>Evertalk needs microphone access to transcribe your voice to text.</string>
 </dict>
 </plist>

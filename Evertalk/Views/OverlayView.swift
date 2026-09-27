@@ -32,6 +32,10 @@ struct OverlayView: View {
                                     .scaleEffect(0.6)
                                     .frame(width: 12, height: 12)
                             }
+                        } else if appState.status == .setupFailed {
+                            Image(systemName: "exclamationmark.triangle.fill")
+                                .font(.system(size: 11, weight: .semibold))
+                                .foregroundColor(.orange)
                         } else if appState.status == .recording {
                             Circle()
                                 .fill(Color.red)
@@ -140,6 +144,8 @@ struct OverlayView: View {
                 return "Downloading... \(percent)%"
             }
             return appState.transcriptionEngine.setupStatus
+        case .setupFailed:
+            return "Setup failed - click to retry"
         case .idle:
             return "Evertalk"
         case .recording:
@@ -155,6 +161,8 @@ struct OverlayView: View {
                 return 200  // Wider for progress bar
             }
             return 180  // Wider for setup text
+        } else if appState.status == .setupFailed {
+            return 210
         } else if appState.status == .recording {
             return 115
         } else if appState.status == .transcribing {
