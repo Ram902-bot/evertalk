@@ -54,6 +54,37 @@ struct MenuBarView: View {
 
             Divider()
 
+            // Update
+            switch appState.updateChecker.state {
+            case .available(let version):
+                Button("Update to \(version)...") {
+                    appState.updateChecker.installUpdate()
+                }
+                .buttonStyle(.plain)
+                .foregroundColor(.accentColor)
+                .padding(.horizontal, 12)
+                .padding(.vertical, 6)
+                Divider()
+            case .updating:
+                Text("Updating Evertalk...")
+                    .font(.system(size: 12))
+                    .foregroundColor(.secondary)
+                    .padding(.horizontal, 12)
+                    .padding(.vertical, 6)
+                Divider()
+            case .failed(let reason):
+                Button("Update failed - retry") {
+                    appState.updateChecker.installUpdate()
+                }
+                .buttonStyle(.plain)
+                .help(reason)
+                .padding(.horizontal, 12)
+                .padding(.vertical, 6)
+                Divider()
+            case .idle:
+                EmptyView()
+            }
+
             // Settings
             Button("Settings...") {
                 openSettings()

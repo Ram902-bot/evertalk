@@ -18,6 +18,7 @@
 		C8E15AD893B68D16191975A6 /* WhisperKit in Frameworks */ = {isa = PBXBuildFile; productRef = A794ECF4A623E194E8EE0F98 /* WhisperKit */; };
 		D6D5B93F4E0AF72386BC75F3 /* HotkeyManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73E6263B52EEA8F220761D5C /* HotkeyManager.swift */; };
 		E3D30C80325139C09776E2F2 /* TranscriptionEngine.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF418B0ACA0938DC956B947A /* TranscriptionEngine.swift */; };
+		3DFF2B2DD8341AEF03F6DF0D /* UpdateChecker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33373642B1B91FB2E8D46CF0 /* UpdateChecker.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -31,6 +32,7 @@
 		8F70E5D37B58BF424E7B4867 /* Evertalk.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Evertalk.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A00B1EEE889D997BAE7B9050 /* MenuBarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuBarView.swift; sourceTree = "<group>"; };
 		AF418B0ACA0938DC956B947A /* TranscriptionEngine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TranscriptionEngine.swift; sourceTree = "<group>"; };
+		33373642B1B91FB2E8D46CF0 /* UpdateChecker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpdateChecker.swift; sourceTree = "<group>"; };
 		AF4BBD74DDC11273F54E2A0B /* OverlayView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OverlayView.swift; sourceTree = "<group>"; };
 		C4D0324BA5F480363F7359C7 /* EvertalkApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EvertalkApp.swift; sourceTree = "<group>"; };
 		EC9F092E17B21341B9E5C66B /* AudioEngine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AudioEngine.swift; sourceTree = "<group>"; };
@@ -77,6 +79,7 @@
 				73E6263B52EEA8F220761D5C /* HotkeyManager.swift */,
 				4C962A29F9C703037C20D2ED /* PasteManager.swift */,
 				AF418B0ACA0938DC956B947A /* TranscriptionEngine.swift */,
+				33373642B1B91FB2E8D46CF0 /* UpdateChecker.swift */,
 			);
 			path = Managers;
 			sourceTree = "<group>";
@@ -184,6 +187,7 @@
 				25A26A7198D510A47CA7F6E1 /* PasteManager.swift in Sources */,
 				BD2B497A44C93E0B221D6555 /* SettingsView.swift in Sources */,
 				E3D30C80325139C09776E2F2 /* TranscriptionEngine.swift in Sources */,
+				3DFF2B2DD8341AEF03F6DF0D /* UpdateChecker.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

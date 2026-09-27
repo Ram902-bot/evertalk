@@ -28,6 +28,7 @@ class AppState: ObservableObject {
     let audioEngine = AudioEngine()
     let transcriptionEngine = TranscriptionEngine()
     let pasteManager = PasteManager()
+    let updateChecker = UpdateChecker()
 
     private var cancellables = Set<AnyCancellable>()
 
@@ -62,6 +63,13 @@ class AppState: ObservableObject {
 
         // Views observe AppState; forward engine changes (progress, status text) so they redraw
         transcriptionEngine.objectWillChange
+            .receive(on: DispatchQueue.main)
+            .sink { [weak self] _ in
+                self?.objectWillChange.send()
+            }
+            .store(in: &cancellables)
+
+        updateChecker.objectWillChange
             .receive(on: DispatchQueue.main)
             .sink { [weak self] _ in
                 self?.objectWillChange.send()
