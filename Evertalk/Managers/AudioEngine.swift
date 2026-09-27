@@ -8,7 +8,10 @@ enum AudioEngineError: Error {
 }
 
 class AudioEngine {
-    private let engine = AVAudioEngine()
+    // Created per recording and released in stopRecording(). A long-lived engine
+    // keeps the input AudioUnit initialised on the default input device, which
+    // holds a Bluetooth headset in the mono 16kHz HFP profile until Evertalk quits.
+    private var engine: AVAudioEngine?
     private var audioBuffer: [Float] = []
     private let bufferQueue = DispatchQueue(label: "com.everstage.evertalk.audiobuffer")
 
@@ -16,6 +19,7 @@ class AudioEngine {
     private let targetSampleRate: Double = 16000
 
     func startRecording() throws {
+        let engine = AVAudioEngine()
         let inputNode = engine.inputNode
         let inputFormat = inputNode.outputFormat(forBus: 0)
 
@@ -29,12 +33,26 @@ class AudioEngine {
             self?.processAudioBuffer(buffer, inputSampleRate: inputFormat.sampleRate)
         }
 
-        try engine.start()
+        do {
+            try engine.start()
+        } catch {
+            // Don't retain an engine that never started
+            inputNode.removeTap(onBus: 0)
+            throw error
+        }
+
+        self.engine = engine
     }
 
     func stopRecording() async throws -> [Float] {
-        engine.inputNode.removeTap(onBus: 0)
-        engine.stop()
+        if let engine = engine {
+            engine.inputNode.removeTap(onBus: 0)
+            engine.stop()
+        }
+
+        // Release the engine so the input AudioUnit is torn down and the
+        // microphone is no longer claimed. Must happen before any throw below.
+        engine = nil
 
         let result = bufferQueue.sync { () -> [Float] in
             let data = audioBuffer
